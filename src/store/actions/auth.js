@@ -32,44 +32,11 @@ export const checkAuthTimeout = (expirationTime) => {
 
 // handle async
 export const auth = (email, password, isSignup) => {
-    return (dispatch) => {
-        dispatch(authStart());
-        const apiKey = 'AIzaSyCQGkHFBocz8SdjADvGjQFEWbIrBB5Gaag';
-        const authData = {
-            email,
-            password,
-            returnSecureToken: true
-        };
-
-        let url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${apiKey}`;
-
-        console.log('[dispatcher signup]', isSignup);
-
-        if (isSignup) {
-            url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`;
-        }
-
-        axios
-            .post(url, authData)
-            .then((res) => {
-                console.log('[url]', url);
-                console.log('[Auth success]', res);
-                const { idToken, localId, expiresIn } = res.data;
-                const expirationDate = new Date(
-                    new Date().getTime() + expiresIn * 1000
-                );
-
-                localStorage.setItem('token', idToken);
-                localStorage.setItem('expirationDate', expirationDate);
-                localStorage.setItem('userId', localId);
-
-                dispatch(authSuccess(idToken, localId));
-                dispatch(checkAuthTimeout(expiresIn));
-            })
-            .catch((err) => {
-                console.log('[Auth error]', err.response);
-                dispatch(authFail(err.response.data.error));
-            });
+    return {
+        type: actionTypes.AUTH_USER,
+        email,
+        password,
+        isSignup
     };
 };
 
