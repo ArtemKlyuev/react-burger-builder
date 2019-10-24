@@ -8,15 +8,6 @@ const initialState = {
     building: false
 };
 
-// initialState = new Proxy(initialState, {
-//     set(target, prop, val) {
-//         console.log('set fired');
-//         if (prop === 'totalPrice') {
-//             target[prop] = val.toFixed(2);
-//         }
-//     }
-// });
-
 const INGREDIENT_PRICES = {
     salad: 0.5,
     cheese: 0.4,
@@ -37,7 +28,6 @@ const addIngredient = (state, action) => {
         totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredient],
         building: true
     };
-    // updatedState.totalPrice = updatedState.totalPrice.toFixed(2);
     return updateObject(state, updatedState);
 };
 
@@ -54,7 +44,6 @@ const removeIngredient = (state, action) => {
         totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredient],
         building: true
     };
-    // updatedState.totalPrice = updatedState.totalPrice.toFixed(2);
 
     return updateObject(state, updatedState);
 };

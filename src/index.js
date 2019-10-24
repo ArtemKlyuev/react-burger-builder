@@ -10,7 +10,11 @@ import registerServiceWorker from './registerServiceWorker';
 import burgerBuilderReducer from './store/reducers/burgerBuilder';
 import orderReducer from './store/reducers/order';
 import authReducer from './store/reducers/auth';
-import { watchAuth } from './store/sagas/index';
+import {
+    watchAuth,
+    watchBurgerBuilder,
+    watchOrders
+} from './store/sagas/index';
 import './index.css';
 
 const composeEnhancers =
@@ -32,6 +36,8 @@ const store = createStore(
 );
 
 sagaMiddleware.run(watchAuth);
+sagaMiddleware.run(watchBurgerBuilder);
+sagaMiddleware.run(watchOrders);
 
 const app = (
     <Provider store={store}>
