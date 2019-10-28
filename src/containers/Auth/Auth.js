@@ -52,10 +52,10 @@ class Auth extends Component {
 
     inputChangedHandler = (e, controlName) => {
         const updatedControls = updateObject(this.state.controls, {
-            [controlName]: updateObject(this.state.controls, {
-                value: e.target.value,
+            [controlName]: updateObject(this.state.controls[controlName], {
+                value: e.currentTarget.value,
                 valid: checkValidity(
-                    e.target.value,
+                    e.currentTarget.value,
                     this.state.controls[controlName].validation
                 ),
                 touched: true
