@@ -51,7 +51,7 @@ const removeIngredient = (state, action) => {
     );
     const updatedState = {
         ingredients: updatedIngredients,
-        totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredient],
+        totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredient],
         building: true
     };
     // updatedState.totalPrice = updatedState.totalPrice.toFixed(2);
